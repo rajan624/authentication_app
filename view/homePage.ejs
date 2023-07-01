@@ -1,19 +1,35 @@
- <link rel="stylesheet" href="/css/homePage.css">
- <header>
-    <div id="header-inner">
-      <a href="#" id="logo"></a>
-      <nav>
-        <a href="#" id="menu-icon"></a>
-          <ul>
-             <li><a href="#" class="current">Home</a></li>
-             <li><a href="#">User</a></li>
-             <li><a href="/login">Logout</a></li>
-          </ul>
-      </nav>
-    </div>
-  </header> 
-  <section class="banner">
-    <div class="banner-inner">
-      <img src="/images/rocket_design_k4nzbm.png">
-    </div>
-  </section>
+<link rel="stylesheet" href="/css/homePage.css" />
+<header>
+  <div id="header-inner">
+    <a href="#" id="logo"></a>
+    <nav>
+      <a href="#" id="menu-icon"></a>
+      <ul>
+        <li><a href="#" class="current"><%= name%></a></li>
+        <li><a href="#"><%= email %></a></li>
+        <li>
+          <a
+            href="#"
+            onclick="event.preventDefault(); document.getElementById('logout-form').submit();"
+            >Logout</a
+          >
+          <form
+            id="logout-form"
+            action="/logout"
+            method="post"
+            style="display: none"
+          >
+            <!-- Add any additional fields if needed -->
+            <input type="hidden" name="_method" value="POST" />
+            <!-- Add any additional fields if needed -->
+          </form>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</header>
+<section class="banner">
+  <div class="banner-inner">
+    <img src="/images/rocket_design_k4nzbm.png" />
+  </div>
+</section>

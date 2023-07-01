@@ -9,7 +9,8 @@ function viewSignUpPage(req, res) {
   });
 }
 const signUp = async (req, res) => {
-  const { name, email, password} = req.body;
+ 
+  const { name, email, password } = req.body;
   if (!name || !email || !password) {
         // return req.flash("success", "Flash message example!");
   }

@@ -1,5 +1,5 @@
 require("dotenv").config();
-const debug =  false;
+const debug =  true;
 function info(...params) {
   if (debug) {
     console.info(params);

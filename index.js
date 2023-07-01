@@ -7,11 +7,11 @@ require("dotenv").config();
 const expressLayout = require("express-ejs-layouts");
 const path = require("path");
 const passport = require("passport");
+const MongoStore = require("connect-mongo");
 const passportLocal = require("./config/passport-local-config");
+const flash = require("connect-flash");
 const port = process.env.PORT || 8000;
 const homeRouter = require("./routers/homeRouter");
-const flash = require("connect-flash");
-app.use(flash());
 app.use(express.static(path.join(__dirname, "assets")));
 app.use(expressLayout);
 app.set("layout extractStyles", true);
@@ -28,12 +28,17 @@ app.use(
     resave: false,
     cookie: {
       maxAge: 1000 * 60 * 100,
-    }
+    },
+    store: MongoStore.create({
+      mongoUrl: "mongodb://0.0.0.0:27017/auth_app",
+      autoRemove: "interval",
+      autoRemoveInterval: 10, // In minutes. Default
+    }),
   })
 );
-
 app.use(passport.initialize());
 app.use(passport.session());
+app.use(flash());
 app.use("", homeRouter);
 
 connect()
