@@ -9,6 +9,7 @@ const path = require("path");
 const passport = require("passport");
 const MongoStore = require("connect-mongo");
 const passportLocal = require("./config/passport-local-config");
+const passportGoogle = require("./config/passport-google-oauth2-strategy");
 const flash = require("connect-flash");
 const port = process.env.PORT || 8000;
 const homeRouter = require("./routers/homeRouter");

@@ -39,10 +39,24 @@ router
 router.post("/logout", function (req, res, next) {
   req.logout(function (err) {
     if (err) {
-      return next(err);
+      return next(err̥);
     }
     res.redirect("/login");
   });
 });
+
+
+router.get(
+  "/auth/google",
+  passport.authenticate("google", { scope: ["profile", "email"] })
+);
+router.get(
+  "/google/callback",
+  passport.authenticate("google", {
+    failureRedirect: "/",
+    successRedirect: "/",
+  })
+);
+
 
 module.exports = router;
