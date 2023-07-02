@@ -12,11 +12,16 @@ const signUp = async (req, res) => {
  
   const { name, email, password } = req.body;
   if (!name || !email || !password) {
-        // return req.flash("success", "Flash message example!");
+    req.flash("error", "Please fill All data");
+   return  res.redirect("/signUp");
   }
   try {
     const mailCheck = await User.findOne({ email });
-    // if (mailCheck) return res.status(400).json({ msg: "Email already exists" });
+    if (mailCheck) {
+      req.flash("error", "Email Already Exists");
+     return res.redirect("/login");
+    }
+
     const salt = await bcrypt.genSalt(10);
     if (!salt) throw Error("Something went wrong with bcrypt");
 
@@ -31,10 +36,11 @@ const signUp = async (req, res) => {
 
     const savedUser = await newUser.save();
     if (!savedUser) throw Error("Something went wrong saving the user");
-      req.flash("success", "Sign Up Successfully!");
-    res.redirect("/login")
+    req.flash("success", "Sign Up Successfully!");
+    return res.redirect("/login")
   } catch (err) {
-    res.status(400).json({ error: err.message });
+     req.flash("error", "Something went wrong");
+   return  res.redirect("/signUp");
   }
 };
 module.exports = {
