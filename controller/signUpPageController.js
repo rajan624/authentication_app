@@ -31,6 +31,7 @@ const signUp = async (req, res) => {
 
     const savedUser = await newUser.save();
     if (!savedUser) throw Error("Something went wrong saving the user");
+      req.flash("success", "Sign Up Successfully!");
     res.redirect("/login")
   } catch (err) {
     res.status(400).json({ error: err.message });

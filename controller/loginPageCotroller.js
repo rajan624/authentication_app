@@ -8,6 +8,12 @@ function viewLoginPage(req, res) {
     })
 }
 
-module.exports = {
-    viewLoginPage
+function loginHandle(req, res) {
+  req.flash("success", "login Successfully!");
+  res.redirect("/");
 }
+
+module.exports = {
+  viewLoginPage,
+  loginHandle,
+};

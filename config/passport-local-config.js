@@ -6,15 +6,14 @@ const bcrypt = require("bcryptjs");
 
 passport.use(
   new LocalStrategy(
-    async function verify(username, password, done) {
+    async function verify( username, password, done) {
       // find a user and establish the identity
       try {
-        
         const user = await User.findOne({ email: username });
         const isMatch = await bcrypt.compare(password, user.password);
         if (!isMatch) {
-          return done(null, false);;
-       }
+          return done(null, false);
+        }
         if (!user) {
           return done(null, false);
         }

@@ -1,3 +1,7 @@
+const User = require("../models/user.model");
+const logger = require("../config/logger");
+const crypto = require("crypto");
+const bcrypt = require("bcryptjs");
 function homePageView(req, res) {
     res.render("homePage", {
       title: `${req.user.username} Home Page`,
@@ -5,7 +9,42 @@ function homePageView(req, res) {
       email: req.user.useremail,
     });
 }
+function resetPasswordView(req, res) {
+  
+    res.render("resetPassword", {
+      title: `${req.user.username} Forgot Password`
+    });
+}
+
+
+async function resetPassword(req, res) {
+  const { password } = req.body;
+  try {
+    // Find the user by email
+    const user = await User.findOne({ email: req.user.useremail });
+
+    if (!user) {
+      logger.error(`User not found: ${req.user.useremail}`);
+    }
+
+    // Generate a new hash for the new password
+    const salt = await bcrypt.genSalt(10);
+    const hash = await bcrypt.hash(password, salt);
+
+    // Update the user's password
+    user.password = hash;
+    await user.save();
+  req.flash("success", "Password Updated Successfully!");
+    res.redirect("/");
+  } catch (error) {
+    logger.error(`Error resetting password: ${error}`);
+  }
+}
+
+
 
 module.exports = {
-    homePageView
-}
+  homePageView,
+  resetPasswordView,
+  resetPassword
+};

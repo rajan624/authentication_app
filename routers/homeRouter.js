@@ -26,21 +26,26 @@ router
   .get(checkUnauthenticated, loginPageController.viewLoginPage)
   .post(function (req, res, next) {
     passport.authenticate("local", {
-      successRedirect: "/",
+      // successRedirect: "/",
       failureRedirect: "/signUp",
       failureFlash: true,
     })(req, res, next);
-  });
+  } , loginPageController.loginHandle );
 router
     .route("/signUp")
     .get(checkUnauthenticated, signUpPageController.viewSignUpPage)
     .post(signUpPageController.signUp);
+router
+  .route("/resetPassword")
+  .get(checkAuthenticated, homePageController.resetPasswordView)
+  .post(checkAuthenticated , homePageController.resetPassword);
 
 router.post("/logout", function (req, res, next) {
   req.logout(function (err) {
     if (err) {
       return next(err̥);
     }
+     req.flash("success", "logout Successfully!");
     res.redirect("/login");
   });
 });
@@ -54,8 +59,9 @@ router.get(
   "/google/callback",
   passport.authenticate("google", {
     failureRedirect: "/",
-    successRedirect: "/",
-  })
+    // successRedirect: "/",
+  }),
+  loginPageController.loginHandle
 );
 
 

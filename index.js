@@ -10,9 +10,10 @@ const passport = require("passport");
 const MongoStore = require("connect-mongo");
 const passportLocal = require("./config/passport-local-config");
 const passportGoogle = require("./config/passport-google-oauth2-strategy");
-const flash = require("connect-flash");
 const port = process.env.PORT || 8000;
 const homeRouter = require("./routers/homeRouter");
+const flash = require("connect-flash");
+const customMware = require("./config/middleware");
 app.use(express.static(path.join(__dirname, "assets")));
 app.use(expressLayout);
 app.set("layout extractStyles", true);
@@ -40,6 +41,7 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(flash());
+app.use(customMware.setFlash);
 app.use("", homeRouter);
 
 connect()
