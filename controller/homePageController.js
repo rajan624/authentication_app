@@ -1,7 +1,8 @@
 const User = require("../models/user.model");
 const logger = require("../config/logger");
-const crypto = require("crypto");
 const bcrypt = require("bcryptjs");
+
+//render homepage
 function homePageView(req, res) {
     res.render("homePage", {
       title: `${req.user.username} Home Page`,
@@ -9,6 +10,8 @@ function homePageView(req, res) {
       email: req.user.useremail,
     });
 }
+
+// render reset password page
 function resetPasswordView(req, res) {
   
     res.render("resetPassword", {
@@ -16,6 +19,8 @@ function resetPasswordView(req, res) {
     });
 }
 
+
+//resetting user password
 
 async function resetPassword(req, res) {
   const { password } = req.body;

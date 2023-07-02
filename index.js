@@ -21,7 +21,7 @@ app.set("layout extractScripts", true);
 app.use(express.urlencoded());
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "view"));
-
+//creating session of user
 app.use(
   session({
     name: "auth_app",
