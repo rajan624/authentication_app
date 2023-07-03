@@ -10,11 +10,10 @@ passport.use(
       // find a user and establish the identity
       try {
         const user = await User.findOne({ email: username });
-        const isMatch = await bcrypt.compare(password, user.password);
         if (!user) {
-          return done(null, false);
            return done(null, false, { message: "Please Sign Up" });
         }
+        const isMatch = await bcrypt.compare(password, user.password);
         if (!isMatch) {
           return done(null, false , { message: "Invalid credentials!" });
         }
