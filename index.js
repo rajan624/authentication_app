@@ -32,7 +32,9 @@ app.use(
       maxAge: 1000 * 60 * 100,
     },
     store: MongoStore.create({
-      mongoUrl: "mongodb://0.0.0.0:27017/auth_app",
+      // mongoUrl: "mongodb://0.0.0.0:27017/auth_app",
+      mongoUrl:
+        "mongodb+srv://rkp33510:956248713@cluster0.jqv0plx.mongodb.net/?retryWrites=true&w=majority",
       autoRemove: "interval",
       autoRemoveInterval: 10, // In minutes. Default
     }),
