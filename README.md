@@ -2,6 +2,22 @@
 
 
 This is a user authentication system that allows users to sign up, sign in, sign out, reset their password, and use Google login/signup for social authentication. The system ensures that passwords are securely stored in the database by encrypting them. Additionally, it includes a bonus feature for password recovery in case a user forgets their password.
+
+- [Installation](#installation)
+
+  
+## Installation
+
+1. Clone the repository:
+
+   ```bash
+   git clone https://github.com/rajan624/authentication_app
+   cd authentication_app
+   npm install  //install dependecies
+   nodemon index.js   //start the server
+
+
+
 # Sign Up
 Users can create an account by providing their email and password.
 
