@@ -3,6 +3,8 @@
 
 This is a user authentication system that allows users to sign up, sign in, sign out, reset their password, and use Google login/signup for social authentication. The system ensures that passwords are securely stored in the database by encrypting them. Additionally, it includes a bonus feature for password recovery in case a user forgets their password.
 
+Check out the live version of the project: <a href="https://auth-app-ewpr.onrender.com/login" target="_blank">Authentication App</a>
+
 - [Installation](#installation)
 
   
